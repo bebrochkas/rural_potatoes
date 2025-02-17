@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: root
+      POSTGRES_DB: teletagy
+  adminer:
+      image: dockette/adminer
+      ports:
+        - 8080:80

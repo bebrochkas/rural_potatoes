@@ -3,7 +3,7 @@ syntax = "proto3";
 package nlp;
 
 service Nlp {
-    rpc GiveTag (FilmDescription) returns (FilmTags);
+    rpc GiveTag (FilmDescription) returns (FilmTags) {}
 }
 
 message FilmDescription {

@@ -1,5 +1,4 @@
 import os
-import spacy
 from classy_classification import ClassyClassifier
 from spacy.compat import pickle
 

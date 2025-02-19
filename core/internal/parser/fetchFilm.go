@@ -29,11 +29,11 @@ type KinoPoiskResp struct {
 	Countries []struct {
 		Name string `json:"name"`
 	} `json:"countries"`
-	Poster []struct {
+	Poster struct {
 		Url        string `json:"url"`
 		PreviewUrl string `json:"previewUrl"`
 	} `json:"poster"`
-	Backdrop []struct {
+	Backdrop struct {
 		Url string `json:"url"`
 	} `json:"backdrop"`
 	Rating struct {

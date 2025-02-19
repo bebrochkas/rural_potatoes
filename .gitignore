@@ -1,6 +1,8 @@
 .env
 .venv
 
+tagger.pkl
+
 logs
 *.log
 npm-debug.log*

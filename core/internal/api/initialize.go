@@ -3,9 +3,11 @@ package api
 import (
 	"github.com/gofiber/fiber/v2"
 
+	"github.com/bebrochkas/rural_potatoes/core/config"
+	"github.com/bebrochkas/rural_potatoes/core/internal/api/film"
 	"github.com/bebrochkas/rural_potatoes/core/internal/api/user"
+	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	// jwtware "github.com/gofiber/contrib/jwt"
 )
 
 func Initialize() {
@@ -22,11 +24,11 @@ func Initialize() {
 
 	user.SetupRoutes(api)
 
-	// auth
+	app.Use(jwtware.New(jwtware.Config{
+		SigningKey: jwtware.SigningKey{Key: config.Cfg.JWT_TOKEN},
+	}))
 
-	// app.Use(jwtware.New(jwtware.Config{
-	// 	SigningKey: jwtware.SigningKey{Key: config.Cfg.JWT_TOKEN},
-	// }))
+	film.SetupRoutes(api)
 
 	app.Listen(":3000")
 

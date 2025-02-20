@@ -21,8 +21,8 @@ func main() {
 		log.Fatal("failed to init DB with", "err", err)
 	}
 
-	api.Initialize()
-
 	parser.FetchBatch(0)
+
+	api.Initialize()
 
 }

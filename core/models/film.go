@@ -8,5 +8,5 @@ type Film struct {
 	PosterUrl    string  `gorm:"not null" json:"posterUrl"`
 	BackdropUrl  string  `gorm:"not null" json:"backdropUrl"`
 	Rate         float32 `gorm:"not null" json:"rate"`
-	Tags         []Tag   `gorm:"many2many:film_tags;" json:"genres"`
+	Tags         []Tag   `gorm:"many2many:film_tags;" json:"tags"`
 }

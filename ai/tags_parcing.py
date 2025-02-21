@@ -1,16 +1,9 @@
-import os
 from spacy.compat import pickle
 
 
 def tagger(description):
     file = open(f"./models/tagger.pkl", "rb")
     nlp = pickle.load(file)
+    tags_chance = dict(sorted(nlp(description).items(), key=lambda item: item[1], reverse=True))
 
-    return nlp(description)
-
-
-print(
-    tagger(
-        "Пострадав в результате несчастного случая, богатый аристократ Филипп нанимает в помощники человека, который менее всего подходит для этой работы, – молодого жителя предместья Дрисса, только что освободившегося из тюрьмы. Несмотря на то, что Филипп прикован к инвалидному креслу, Дриссу удается привнести в размеренную жизнь аристократа дух приключений."
-    )
-)
+    return [i for i in tags_chance][:3]

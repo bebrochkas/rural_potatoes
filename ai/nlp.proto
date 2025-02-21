@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package nlp;
+
+// Сервис для обработки запросов
+service Nlp {
+    // Метод для присвоения тегов фильму
+    rpc GiveTag (ServerRequest) returns (TagsReply) {}
+}
+
+// Запрос с описанием фильма
+message ServerRequest {
+    string description = 1;
+}
+
+// Ответ с тегами для фильма
+message TagsReply {
+    string tags = 1;
+}

@@ -2,7 +2,6 @@ import os
 from classy_classification import ClassyClassifier
 from spacy.compat import pickle
 
-
 def learn_model():
     data = {
         "".join(list(i)[:-4]): open(f"./tags_data/{i}", "r", encoding="UTF-8")
@@ -21,6 +20,5 @@ def learn_model():
 
     with open(f"./models/tagger.pkl", "wb") as file:
         pickle.dump(nlp, file)
-
 
 learn_model()

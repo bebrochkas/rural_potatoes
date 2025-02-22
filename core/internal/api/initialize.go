@@ -5,6 +5,7 @@ import (
 
 	"github.com/bebrochkas/rural_potatoes/core/config"
 	"github.com/bebrochkas/rural_potatoes/core/internal/api/film"
+	"github.com/bebrochkas/rural_potatoes/core/internal/api/tag"
 	"github.com/bebrochkas/rural_potatoes/core/internal/api/user"
 	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -29,6 +30,8 @@ func Initialize() {
 	}))
 
 	film.SetupRoutes(api)
+
+	tag.SetupRoutes(api)
 
 	app.Listen(":3000")
 

@@ -3,16 +3,13 @@ package films_tags
 import (
 	"github.com/bebrochkas/rural_potatoes/core/internal/db"
 	"github.com/bebrochkas/rural_potatoes/core/models"
-	"github.com/charmbracelet/log"
 )
 
 func SelectTagsFilms(offset int, limit int, tags []string) ([]models.Film, error) {
 
 	var films []models.Film
 
-	log.Print(tags)
-
-	query := db.DB.Model(&models.Film{})
+	query := db.DB.Model(&models.Film{}).Preload("Tags")
 
 	if tags[0] != "" {
 		query = query.Joins("JOIN film_tags ON film_tags.film_id = films.id").
@@ -29,4 +26,12 @@ func SelectTagsFilms(offset int, limit int, tags []string) ([]models.Film, error
 
 	return films, nil
 
+}
+
+func SelectTags() ([]models.Tag, error) {
+	var tags []models.Tag
+	if err := db.DB.Find(&tags).Error; err != nil {
+		return tags, err
+	}
+	return tags, nil
 }

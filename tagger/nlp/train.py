@@ -2,12 +2,13 @@ import os
 from classy_classification import ClassyClassifier
 from spacy.compat import pickle
 
-def learn_model():
+
+def train_model():
     data = {
-        "".join(list(i)[:-4]): open(f"./tags_data/{i}", "r", encoding="UTF-8")
+        "".join(list(i)[:-4]): open(f"../tags_data/{i}", "r", encoding="UTF-8")
         .read()
         .split("\n")[1:]
-        for i in os.listdir(f"./tags_data")
+        for i in os.listdir("../tags_data")
     }
 
     nlp = ClassyClassifier(
@@ -16,9 +17,10 @@ def learn_model():
         model="cointegrated/rubert-tiny2",
     )
 
-    os.makedirs("./models", exist_ok=True)
+    os.makedirs("../models", exist_ok=True)
 
-    with open(f"./models/tagger.pkl", "wb") as file:
+    with open("../models/tagger.pkl", "wb") as file:
         pickle.dump(nlp, file)
 
-learn_model()
+
+train_model()

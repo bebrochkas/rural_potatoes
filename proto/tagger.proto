@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package nlp;
+package tagger;
 
 // Сервис для обработки запросов
-service Nlp {
+service Tagger {
     // Метод для присвоения тегов фильму
-    rpc GiveTag (ServerRequest) returns (TagsReply) {}
+    rpc Tag (TagRequest) returns (TagsReply) {}
 }
 
 // Запрос с описанием фильма
-message ServerRequest {
+message TagRequest {
     string description = 1;
 }
 

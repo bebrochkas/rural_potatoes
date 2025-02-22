@@ -1,3 +1,4 @@
+import { axiosInst } from "@/api/axios";
 import React, { createContext, useContext, useState } from "react";
 
 interface AuthContextType {
@@ -8,11 +9,16 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem("jwtToken"));
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem("jwtToken"),
+  );
 
   const login = (token: string) => {
     localStorage.setItem("jwtToken", token);
+    axiosInst.defaults.headers.Authorization = `Bearer ${token}`;
     setToken(token);
   };
 

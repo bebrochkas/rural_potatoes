@@ -7,6 +7,7 @@ import (
 	"github.com/bebrochkas/rural_potatoes/core/internal/api"
 	"github.com/bebrochkas/rural_potatoes/core/internal/db"
 	"github.com/bebrochkas/rural_potatoes/core/internal/parser"
+	"github.com/bebrochkas/rural_potatoes/core/internal/pb"
 	"github.com/charmbracelet/log"
 )
 
@@ -21,7 +22,11 @@ func main() {
 		log.Fatal("failed to init DB with", "err", err)
 	}
 
-	parser.FetchBatch(0)
+	if err := pb.Initialize(); err != nil {
+		log.Fatal("failed to init PB with", "err", err)
+	}
+
+	parser.FetchBatch(20)
 
 	api.Initialize()
 

@@ -4,6 +4,16 @@ from spacy.compat import pickle
 def tagger(description):
     file = open(f"./models/tagger.pkl", "rb")
     nlp = pickle.load(file)
-    tags_chance = dict(sorted(nlp(description).items(), key=lambda item: item[1], reverse=True))
+    tags_confs = dict(
+        sorted(nlp(description).items(), key=lambda item: item[1], reverse=True)
+    )
 
-    return [i for i in tags_chance][:3]
+    output = []
+
+    for tag, conf in tags_confs.items():
+        if conf >= 0.3:
+            output.append(tag)
+
+    return output
+
+    # return str([i for i in tags_confs][:3])

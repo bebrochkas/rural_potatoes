@@ -24,13 +24,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0ctagger.proto\x12\x06tagger\"!\n\nTagRequest\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\"\x19\n\tTagsReply\x12\x0c\n\x04tags\x18\x01 \x01(\t28\n\x06Tagger\x12.\n\x03Tag\x12\x12.tagger.TagRequest\x1a\x11.tagger.TagsReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0ctagger.proto\x12\x06tagger\"!\n\nTagRequest\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\"\x19\n\tTagsReply\x12\x0c\n\x04tags\x18\x01 \x03(\t28\n\x06Tagger\x12.\n\x03Tag\x12\x12.tagger.TagRequest\x1a\x11.tagger.TagsReply\"\x00\x42\x31Z/github.com/bebrochkas/rural_potatoes/core/protob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tagger_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  DESCRIPTOR._loaded_options = None
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'Z/github.com/bebrochkas/rural_potatoes/core/proto'
   _globals['_TAGREQUEST']._serialized_start=24
   _globals['_TAGREQUEST']._serialized_end=57
   _globals['_TAGSREPLY']._serialized_start=59

@@ -7,7 +7,7 @@ from concurrent import futures
 
 
 class Tagger(tagger_pb2_grpc.TaggerServicer):
-    def film_tags(self, request, context):
+    def Tag(self, request, context):
         return tagger_pb2.TagsReply(tags=tagger(request.description))
 
 

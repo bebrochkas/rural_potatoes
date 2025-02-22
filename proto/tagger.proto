@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package tagger;
 
+option go_package = "github.com/bebrochkas/rural_potatoes/core/proto";
+
+
 // Сервис для обработки запросов
 service Tagger {
     // Метод для присвоения тегов фильму
@@ -15,5 +18,5 @@ message TagRequest {
 
 // Ответ с тегами для фильма
 message TagsReply {
-    string tags = 1;
+    repeated string tags = 1;
 }

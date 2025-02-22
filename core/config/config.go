@@ -7,8 +7,8 @@ import (
 )
 
 type Config struct {
-	KINOPOISK_KEY, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME string
-	JWT_TOKEN                                                      []byte
+	KINOPOISK_KEY, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, PB_TARGET string
+	JWT_TOKEN                                                                 []byte
 }
 
 var Cfg Config
@@ -26,6 +26,7 @@ func Initialize(envPath string) {
 		DB_HOST:       os.Getenv("DB_HOST"),
 		DB_PORT:       os.Getenv("DB_PORT"),
 		DB_NAME:       os.Getenv("DB_NAME"),
+		PB_TARGET:     os.Getenv("PB_TARGET"),
 		JWT_TOKEN:     []byte(os.Getenv("JWT_TOKEN")),
 	}
 

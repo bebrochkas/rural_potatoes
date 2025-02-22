@@ -23,3 +23,7 @@ bun.lock
 *.ntvs*
 *.njsproj
 *.sw?
+/frontend/.projectile
+/frontend/src/assets/ognivo.png
+/tagger/genproto/__pycache__/tagger_pb2.cpython-310.pyc
+/tagger/genproto/__pycache__/tagger_pb2_grpc.cpython-310.pyc

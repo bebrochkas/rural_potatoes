@@ -1,4 +1,5 @@
 import spacy
+from tagger.nlp.tag import tagger
 
 
 def tag(description):

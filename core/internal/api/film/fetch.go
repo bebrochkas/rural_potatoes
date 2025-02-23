@@ -12,7 +12,7 @@ func fetchFilms(c *fiber.Ctx) error {
 
 	limit := c.QueryInt("limit", 30)
 
-	tags := strings.Split(c.Query("tag", ""), ",")
+	tags := strings.Split(c.Query("tags", ""), ",")
 
 	films, err := films_tags.SelectTagsFilms(offset, limit, tags)
 

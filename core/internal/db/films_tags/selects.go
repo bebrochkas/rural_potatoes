@@ -3,18 +3,32 @@ package films_tags
 import (
 	"github.com/bebrochkas/rural_potatoes/core/internal/db"
 	"github.com/bebrochkas/rural_potatoes/core/models"
+	"gorm.io/gorm"
 )
 
 func SelectTagsFilms(offset int, limit int, tags []string) ([]models.Film, error) {
-
 	var films []models.Film
 
-	query := db.DB.Model(&models.Film{}).Preload("Tags")
+	query := db.DB.Model(&models.Film{}).
+		Preload("Tags", func(db *gorm.DB) *gorm.DB {
+			return db.Order(`
+			CASE
+				WHEN type = 'rate' THEN 1
+				WHEN type = 'age rating' THEN 2
+				WHEN type = 'release' THEN 3
+				WHEN type = 'country' THEN 4
+				WHEN type = 'thematic' THEN 5
+				ELSE 6
+			END
+		`)
+		})
 
-	if tags[0] != "" {
+	if len(tags) > 0 && tags[0] != "" {
 		query = query.Joins("JOIN film_tags ON film_tags.film_id = films.id").
 			Joins("JOIN tags ON tags.id = film_tags.tag_id").
-			Where("tags.id IN (?)", tags)
+			Where("tags.id IN (?)", tags).
+			Group("films.id").
+			Having("COUNT(DISTINCT tags.id) = ?", len(tags))
 	}
 
 	query = query.Limit(limit).Offset(offset)
@@ -25,7 +39,6 @@ func SelectTagsFilms(offset int, limit int, tags []string) ([]models.Film, error
 	}
 
 	return films, nil
-
 }
 
 func SelectTags() ([]models.Tag, error) {

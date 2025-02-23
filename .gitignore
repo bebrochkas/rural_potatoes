@@ -1,6 +1,7 @@
 .env
 .venv
 
+textcat_multilabel_model
 tagger.pkl
 
 logs

@@ -9,9 +9,15 @@ def tagger(description):
     )
 
     output = []
+    mid = 0
+
+    for conf in tags_confs.items():
+        mid += conf[1]
+
+    mid /= len(tags_confs)
 
     for tag, conf in tags_confs.items():
-        if conf >= 0.3:
+        if conf >= mid:
             output.append(tag)
 
     return output

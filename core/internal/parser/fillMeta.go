@@ -85,6 +85,8 @@ func proccesMeta(kinoFilm *KinoPoiskResp) (models.Film, []models.Tag, error) {
 
 	film.Rate = susp_rating
 
+	tags = append(tags, models.Tag{Name: rateTag, Type: "rate"})
+
 	theme_tags, err := pb.GetTags(film.Description)
 
 	if err != nil {
@@ -94,8 +96,6 @@ func proccesMeta(kinoFilm *KinoPoiskResp) (models.Film, []models.Tag, error) {
 	for _, theme_tag := range theme_tags {
 		tags = append(tags, models.Tag{Name: theme_tag, Type: "thematic"})
 	}
-
-	tags = append(tags, models.Tag{Name: rateTag, Type: "rate"})
 
 	return film, tags, nil
 

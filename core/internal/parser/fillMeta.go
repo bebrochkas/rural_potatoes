@@ -77,9 +77,9 @@ func proccesMeta(kinoFilm *KinoPoiskResp) (models.Film, []models.Tag, error) {
 		case susp_rating <= 6:
 			rateTag = "Средние оценки"
 		case susp_rating <= 8.5:
-			rateTag = "Выскоие оценки"
+			rateTag = "Высокие оценки"
 		default:
-			rateTag = "Крайне выскоие оценки"
+			rateTag = "Крайне высокие оценки"
 		}
 	}
 

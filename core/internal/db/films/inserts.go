@@ -1,4 +1,4 @@
-package films_tags
+package films
 
 import (
 	"github.com/bebrochkas/rural_potatoes/core/internal/db"

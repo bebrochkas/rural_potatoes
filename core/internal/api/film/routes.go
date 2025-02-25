@@ -8,7 +8,9 @@ func SetupRoutes(api fiber.Router) {
 	auth := api.Group("/films")
 
 	// fetch
-	auth.Get("/fetch", fetchFilms)
+	auth.Get("/", fetchFilms)
 
 	//
+	auth.Post("/rate", rateFilm)
+
 }

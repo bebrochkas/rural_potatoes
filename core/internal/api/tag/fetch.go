@@ -1,12 +1,12 @@
 package tag
 
 import (
-	"github.com/bebrochkas/rural_potatoes/core/internal/db/films_tags"
+	"github.com/bebrochkas/rural_potatoes/core/internal/db/tags"
 	"github.com/gofiber/fiber/v2"
 )
 
 func fetchTags(c *fiber.Ctx) error {
-	tags, err := films_tags.SelectTags()
+	tags, err := tags.SelectTags(nil)
 
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{

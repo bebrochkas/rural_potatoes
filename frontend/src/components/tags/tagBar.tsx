@@ -6,16 +6,33 @@ interface tagBarProps {
     tags: Tag[];
     selectedTags: number[];
     setSelectedTags: React.Dispatch<React.SetStateAction<number[]>>;
+    feedMode: boolean;
+    setFeedMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const TagBar = ({
     tags,
     selectedTags,
     setSelectedTags,
+    feedMode,
+    setFeedMode,
 }: tagBarProps) => {
     return (
         <div className="flex w-full flex-col overflow-x-scroll">
-            <ul className="flex flex-row gap-2">
+            <ul className="flex flex-row gap-2 items-center">
+                <li>
+                    <Badge
+                        className={`rounded-full text-nowrap font-medium cursor-pointer ${
+                            feedMode ? "bg-blue-500 text-white" : "bg-gray-200"
+                        }`}
+                        onClick={() => {
+                            setFeedMode((prev) => !prev);
+                        }}
+                    >
+                        Рекомедации
+                    </Badge>
+                </li>
+
                 {tags.map((tag) => (
                     <li key={tag.id}>
                         <Badge

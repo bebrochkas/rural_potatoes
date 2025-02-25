@@ -10,6 +10,5 @@ func SelectUser(username string) (models.User, error) {
 	if err := db.DB.Where("username = ?", username).First(&user).Error; err != nil {
 		return user, err
 	}
-
 	return user, nil
 }

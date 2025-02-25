@@ -21,3 +21,6 @@ def train_model():
 
     with open("../models/tagger.pkl", "wb") as file:
         pickle.dump(nlp, file)
+
+
+train_model()

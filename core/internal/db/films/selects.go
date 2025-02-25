@@ -1,4 +1,4 @@
-package films_tags
+package films
 
 import (
 	"github.com/bebrochkas/rural_potatoes/core/internal/db"
@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func SelectTagsFilms(offset int, limit int, tags []string) ([]models.Film, error) {
+func SelectTagsFilms(offset int, limit int, strict bool, tags []string, prompt string) ([]models.Film, error) {
 	var films []models.Film
 
 	query := db.DB.Model(&models.Film{}).
@@ -23,15 +23,24 @@ func SelectTagsFilms(offset int, limit int, tags []string) ([]models.Film, error
 		`)
 		})
 
+	if len(prompt) > 2 {
+		query = query.Where("films.title % ?", prompt)
+	}
+
 	if len(tags) > 0 && tags[0] != "" {
 		query = query.Joins("JOIN film_tags ON film_tags.film_id = films.id").
 			Joins("JOIN tags ON tags.id = film_tags.tag_id").
 			Where("tags.id IN (?)", tags).
-			Group("films.id").
-			Having("COUNT(DISTINCT tags.id) = ?", len(tags))
+			Group("films.id")
+
+		if strict {
+			query = query.Having("COUNT(DISTINCT tags.id) = ?", len(tags))
+		} else {
+			query = query.Having("COUNT(DISTINCT tags.id) >= 1")
+		}
 	}
 
-	query = query.Limit(limit).Offset(offset)
+	query = query.Limit(limit).Offset(offset).Order("likes desc")
 
 	err := query.Find(&films).Error
 	if err != nil {
@@ -39,12 +48,4 @@ func SelectTagsFilms(offset int, limit int, tags []string) ([]models.Film, error
 	}
 
 	return films, nil
-}
-
-func SelectTags() ([]models.Tag, error) {
-	var tags []models.Tag
-	if err := db.DB.Find(&tags).Error; err != nil {
-		return tags, err
-	}
-	return tags, nil
 }

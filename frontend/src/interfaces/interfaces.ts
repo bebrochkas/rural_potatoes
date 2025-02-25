@@ -13,5 +13,8 @@ export interface Film {
     posterUrl: string;
     backdropUrl: string;
     rate: number;
+    likes: number;
+    dislikes: number;
+
     tags: Tag[];
 }

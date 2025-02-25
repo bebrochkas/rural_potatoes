@@ -2,6 +2,7 @@ package crypto
 
 import (
 	"github.com/bebrochkas/rural_potatoes/core/config"
+	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -27,4 +28,10 @@ func VerifyToken(tokenString string) (bool, error) {
 	}
 
 	return token.Valid, nil
+}
+
+func GetUserID(c *fiber.Ctx) uint {
+	user := c.Locals("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	return uint(claims["user_id"].(float64))
 }

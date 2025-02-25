@@ -10,5 +10,7 @@ func SetupRoutes(api fiber.Router) {
 	// fetch
 	auth.Get("/", fetchTags)
 
-	//
+	// suggest
+	auth.Post("/suggest", suggestTags)
+
 }

@@ -2,8 +2,7 @@ package parser
 
 import (
 	"github.com/charmbracelet/log"
-
-	"github.com/bebrochkas/rural_potatoes/core/internal/db/films_tags"
+	"github.com/bebrochkas/rural_potatoes/core/internal/db/films"
 )
 
 func FetchBatch(size int) (int, error) {
@@ -25,7 +24,7 @@ func FetchBatch(size int) (int, error) {
 			continue
 		}
 
-		err = films_tags.InsertFilmWTags(&film, tags)
+		err = films.InsertFilmWTags(&film, tags)
 
 		if err != nil {
 			log.Error("filed to save film to db with", "id", filmId, "and err", err)

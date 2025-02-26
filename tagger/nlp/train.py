@@ -5,10 +5,10 @@ from spacy.compat import pickle
 
 def train_model():
     data = {
-        "".join(list(i)[:-4]): open(f"../tags_data/{i}", "r", encoding="UTF-8")
+        "".join(list(i)[:-4]): open(f"../rewritten_tags_data/{i}", "r", encoding="UTF-8")
         .read()
         .split("\n")[1:]
-        for i in os.listdir("../tags_data")
+        for i in os.listdir("../rewritten_tags_data")
     }
 
     nlp = ClassyClassifier(

@@ -15,13 +15,10 @@ def tagger(description):
         mid += conf[1]
 
     mid /= len(tags_confs)
+    mid += 0.1
 
     for tag, conf in tags_confs.items():
-<<<<<<< HEAD
         if conf >= mid:
-=======
-        if conf >= 0.1:
->>>>>>> 3decd50 (no time to divide commits)
             output.append(tag)
 
     return output

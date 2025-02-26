@@ -43,8 +43,8 @@ type KinoPoiskResp struct {
 	} `json:"rating"`
 }
 
-func fetchFilm(filmId int) (*KinoPoiskResp, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("https://api.kinopoisk.dev/v1.4/movie/%d", filmId), nil)
+func fetchFilm(_ int) (*KinoPoiskResp, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("https://api.kinopoisk.dev/v1.4/movie/random?notNullFields=name&notNullFields=description"), nil)
 	if err != nil {
 		return nil, err
 	}

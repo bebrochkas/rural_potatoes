@@ -61,7 +61,11 @@ func Initialize() error {
 
 	DB.Exec("CREATE EXTENSION IF NOT EXISTS pg_trgm")
 
-	return DB.AutoMigrate(&models.User{}, &models.UserTagScore{}, &models.Film{}, &models.Tag{})
+	if err := DB.AutoMigrate(&models.User{}, &models.UserTagScore{}, &models.Film{}, &models.Tag{}); err != nil {
+		return err
+	}
+
+	return MigrateTags()
 
 	// tags, err := MigrateTags()
 

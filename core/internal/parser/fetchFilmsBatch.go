@@ -1,20 +1,21 @@
 package parser
 
 import (
-	"github.com/charmbracelet/log"
 	"github.com/bebrochkas/rural_potatoes/core/internal/db/films"
+	"github.com/charmbracelet/log"
 )
 
 func FetchBatch(size int) (int, error) {
 	var fetched int
-	for filmId := 298; filmId <= (298 + size); filmId++ {
+	for filmId := 1340709; filmId <= (1340709 + size); filmId++ {
 		kinoFilm, err := fetchFilm(filmId)
 		if err != nil {
 			log.Error("filed to fetch film with", "id", filmId, "and err", err)
 		}
 
 		if kinoFilm.Name == "" || kinoFilm.Desc == "" {
-			return 0, nil
+			log.Error("empty name or description for film with", "id", filmId)
+			continue
 		}
 
 		film, tags, err := proccesMeta(kinoFilm)

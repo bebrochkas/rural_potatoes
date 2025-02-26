@@ -26,7 +26,7 @@ func main() {
 		log.Fatal("failed to init PB with", "err", err)
 	}
 
-	parser.FetchBatch(30)
+	parser.FetchBatch(0)
 
 	api.Initialize()
 

@@ -1,19 +1,47 @@
 package db
 
-import "github.com/bebrochkas/rural_potatoes/core/models"
+import (
+	"bufio"
+	"github.com/bebrochkas/rural_potatoes/core/models"
+	"os"
+)
 
-var systemTags = []string{}
-
-func MigrateTags() (*[]*models.Tag, error) {
-
+func MigrateTags() error {
 	var tags []*models.Tag
 
-	for _, systemTag := range systemTags {
-		tags = append(tags, &models.Tag{Name: systemTag})
+	prefix := "../tagger/tags_data/"
+
+	tagDir, err := os.ReadDir(prefix)
+	if err != nil {
+		return err
 	}
 
-	// thematic tags loading logic
+	for _, tagFilePath := range tagDir {
+		tagFile, err := os.Open(prefix + tagFilePath.Name())
+		if err != nil {
+			return err
+		}
+		defer tagFile.Close()
 
-	return &tags, nil
+		var hex string
+		scanner := bufio.NewScanner(tagFile)
+		if scanner.Scan() {
+			hex = scanner.Text()
+		}
 
+		if err := scanner.Err(); err != nil {
+			return err
+		}
+
+		// Prepare the tag data
+		tag := &models.Tag{Name: tagFilePath.Name()[:len(tagFilePath.Name())-4], Hex: hex}
+
+		if err := DB.FirstOrCreate(&tag, models.Tag{Name: tag.Name}).Error; err != nil {
+			return err
+		}
+
+		tags = append(tags, tag)
+	}
+
+	return nil
 }

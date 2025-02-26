@@ -18,12 +18,12 @@ export const TagBar = ({
     setFeedMode,
 }: tagBarProps) => {
     return (
-        <div className="flex w-full flex-col overflow-x-scroll">
-            <ul className="flex flex-row gap-2 items-center">
+        <div className="flex w-full flex-col overflow-x-scroll no-scrollbar rounded-full ">
+            <ul className="flex flex-row gap-2 items-center rounded-full">
                 <li>
                     <Badge
-                        className={`rounded-full text-nowrap font-medium cursor-pointer ${
-                            feedMode ? "bg-blue-500 text-white" : "bg-gray-200"
+                        className={`rounded-full text-nowrap font-medium cursor-pointer text-sm ${
+                            feedMode ? "bg-blue-700 text-white" : "bg-gray-400"
                         }`}
                         onClick={() => {
                             setFeedMode((prev) => !prev);
@@ -36,11 +36,12 @@ export const TagBar = ({
                 {tags.map((tag) => (
                     <li key={tag.id}>
                         <Badge
-                            className={`rounded-full text-nowrap font-medium cursor-pointer ${
+                            className={`rounded-full text-nowrap font-medium text-sm cursor-pointer ${
                                 selectedTags.includes(tag.id)
                                     ? "bg-blue-500 text-white"
-                                    : "bg-gray-200"
+                                    : ""
                             }`}
+                            style={{ backgroundColor: tag.hex }}
                             onClick={() => {
                                 setSelectedTags((prevTags) => {
                                     if (prevTags.includes(tag.id)) {

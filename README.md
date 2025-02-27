@@ -15,17 +15,30 @@ Rural Potatoes - это ваш главный помощник в поиске �
   <img src="assets/video_record_1.gif" width="738">
 </p>
 
-## Как использовать
+## Установка 
+```shell
+git clone https://github.com/bebrochkas/rural_potatoes.git
+cd rural_potatoes
+```
 
+## Использование 
+Скачать [отсюда](http://) в `/tagger/models/` или обучить модель самостоятельно
 ### Обучение модели
-
-Для обучения модели вам необходимо вписать в консоль
-
-`python -m spacy train spacy_categorization_pipeline.cfg
+```shell
+cd tagger/nlp
+python -m spacy train spacy_categorization_pipeline.cfg
 --paths.train training_multi_label.spacy 
 --paths.dev test_multi_label.spacy 
---output ../models/textcat_multilabel_model`\
-
+--output ../models/textcat_multilabel_model
+```
 и дождаться окончания процесса обучения обучения модели.
 
-### Запуск сайта
+### Запуск
+Убедитесь что Docker уставновлен на вашей системе
+
+В корневой папке репозитория запустите контейнер:
+```shell
+docker compose up
+```
+
+### Интерфейс будет доступен на [localhost:3000](http://loclhost:3000)🎉

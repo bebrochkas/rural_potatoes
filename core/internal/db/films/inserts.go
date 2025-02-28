@@ -18,8 +18,7 @@ func InsertFilmWTags(film *models.Film, tags []models.Tag) error {
 		return err
 	}
 
-	// Теперь tags содержит обновлённые объекты с ID, и Append будет работать
-	err = db.DB.Model(film).Association("Tags").Replace(tags) // или Append(tags)
+	err = db.DB.Model(film).Association("Tags").Replace(tags)
 	if err != nil {
 		return err
 	}

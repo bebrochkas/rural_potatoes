@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	// "os"
+	//
 
 	"github.com/bebrochkas/rural_potatoes/core/config"
 	"github.com/bebrochkas/rural_potatoes/core/models"
@@ -48,7 +49,7 @@ func OpenOrCreateDialcector(dbName string) (gorm.Dialector, error) {
 	return postgres.Open(DSN(dbName)), nil
 }
 
-func Initialize() error {
+func Initialize(initMigrate bool) error {
 
 	dialector, err := OpenOrCreateDialcector("rural_potatoes")
 	if err != nil {
@@ -61,35 +62,30 @@ func Initialize() error {
 
 	DB.Exec("CREATE EXTENSION IF NOT EXISTS pg_trgm")
 
-	if err := DB.AutoMigrate(&models.User{}, &models.UserTagScore{}, &models.Film{}, &models.Tag{}); err != nil {
+	if err := DB.AutoMigrate(&models.User{}, &models.UserTagScore{}, &models.Film{}, &models.Tag{}, &models.Review{}); err != nil {
 		return err
 	}
 
-	return MigrateTags()
+	if initMigrate {
 
-	// tags, err := MigrateTags()
+		if err := autoFilms(); err != nil {
+			log.Error("failed to migrate films", "err", err)
+		}
 
-	// if err != nil {
-	// 	return err
-	// }
+		if err := autoTags(); err != nil {
+			log.Error("failed to migrate tags ", "err", err)
+		}
 
-	// return DB.Create(*tags).Error
+		if err := autoFilmsTags(); err != nil {
+			log.Error("failed to migrate filmtags", "err", err)
+		}
 
-	// var topics []string
+	}
 
-	// topicDir, err := os.ReadDir("../../nlp/topic_extraction/model/data")
-	// if err != nil {
-	// 	return err
-	// }
+	if err := ColoriseTags("./tags_data/"); err != nil {
+		log.Error("failed to migrate tags colors", "err", err)
+	}
 
-	// for _, topicFile := range topicDir {
-
-	// 	topics = append(topics, topicFile.Name()[:len(topicFile.Name())-4])
-	// }
-
-	// if err := InsertTopics(topics); err != nil {
-	// 	return err
-
-	// }
+	return nil
 
 }

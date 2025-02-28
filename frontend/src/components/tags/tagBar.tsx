@@ -36,12 +36,14 @@ export const TagBar = ({
                 {tags.map((tag) => (
                     <li key={tag.id}>
                         <Badge
-                            className={`rounded-full text-nowrap font-medium text-sm cursor-pointer ${
-                                selectedTags.includes(tag.id)
-                                    ? "bg-blue-500 text-white"
-                                    : ""
-                            }`}
-                            style={{ backgroundColor: tag.hex }}
+                            className={`rounded-full text-nowrap font-medium text-sm cursor-pointer`}
+                            style={{
+                                backgroundColor: `${
+                                    selectedTags.includes(tag.id)
+                                        ? "var(--color-blue-500)"
+                                        : tag.hex
+                                }`,
+                            }}
                             onClick={() => {
                                 setSelectedTags((prevTags) => {
                                     if (prevTags.includes(tag.id)) {

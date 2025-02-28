@@ -1,0 +1,92 @@
+﻿id,name,hex,type
+87,Бельгия,"",country
+88,Югославия,"",country
+16,Позитивное,#C71585,thematic
+89,Австрия,"",country
+90,Турция,"",country
+1,Боевики,#9a1616,thematic
+73,Саудовская Аравия,"",country
+74,Иордания,"",country
+75,ОАЭ,"",country
+76,Швейцария,"",country
+77,Чехословакия,"",country
+78,Сенегал,"",country
+79,Тайвань,"",country
+80,Югославия (ФР),"",country
+81,Чехия,"",country
+91,Израиль,"",country
+17,Романтика,#DC143C,thematic
+18,Свадьба,#F0E68C,thematic
+124,Филиппины,"",country
+125,Куба,"",country
+19,Семейный,#DA70D6,thematic
+20,Спорт,#66CDAA,thematic
+21,Ужасы,#A52A2A,thematic
+34,1960-1979,"",release
+35,Великобритания,"",country
+36,18+,"",age rating
+37,Высокие оценки,"",rate
+38,1930-1959,"",release
+39,США,"",country
+40,12+,"",age rating
+41,1980-1999,"",release
+42,Гонконг,"",country
+43,"0+","",age rating
+44,2000-2009,"",release
+45,Бразилия,"",country
+46,Франция,"",country
+47,16+,"",age rating
+48,Германия (ФРГ),"",country
+49,Средние оценки,"",rate
+50,Китай,"",country
+51,Италия,"",country
+52,Япония,"",country
+53,Египет,"",country
+54,Нидерланды,"",country
+55,Швеция,"",country
+56,Дания,"",country
+57,СССР,"",country
+58,Мексика,"",country
+59,Канада,"",country
+60,Германия,"",country
+61,2010-2019,"",release
+62,Перу,"",country
+63,Новая Зеландия,"",country
+64,Крайне высокие оценки,"",rate
+65,Индия,"",country
+66,ЮАР,"",country
+67,Финляндия,"",country
+68,Австралия,"",country
+69,Иран,"",country
+70,Россия,"",country
+71,Норвегия,"",country
+72,Испания,"",country
+22,Фантастика,#FF00FF,thematic
+23,Фэнтези,#FF0033,thematic
+126,позже 2019,"",release
+24,Хэллоуин,#D2691E,thematic
+2,Война,#8B0000,thematic
+3,Депрессивное,#2F4F4F,thematic
+4,Детективы,#A0522D,thematic
+5,Детское,#7B68EE,thematic
+6,Зомби,#006400,thematic
+7,Инопланетяне,#32CD32,thematic
+8,Искусство,#FF4500,thematic
+9,Комедии,#FFAA00,thematic
+82,Венгрия,"",country
+83,Болгария,"",country
+84,Польша,"",country
+85,6+,"",age rating
+86,Корея Южная,"",country
+10,Космос,#191970,thematic
+11,Мелодрамы,#006AB5,thematic
+12,Мотивирующее,#DAA520,thematic
+25,Школа,#556B2F,thematic
+127,Северная Македония,"",country
+128,Алжир,"",country
+129,Ирландия,"",country
+130,Вьетнам,"",country
+131,Португалия,"",country
+13,Новый год,#0000CD,thematic
+14,Океан,#00CED1,thematic
+15,Повседневность,#4B0082,thematic

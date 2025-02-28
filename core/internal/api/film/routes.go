@@ -11,6 +11,5 @@ func SetupRoutes(api fiber.Router) {
 	auth.Get("/", fetchFilms)
 
 	//
-	auth.Post("/rate", rateFilm)
 
 }

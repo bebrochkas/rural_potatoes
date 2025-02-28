@@ -1,10 +1,9 @@
-import { axiosInst } from "@/api/axios";
 import { Badge } from "@/components/ui/badge";
 import { Film } from "@/interfaces/interfaces";
-
-import { ThumbsUp, ThumbsDown } from "lucide-react";
+import { ReviewsDrawer } from "@/components/films/reviews";
+import { ThumbsUp, ThumbsDown, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import { useState } from "react";
 import {
     Dialog,
     DialogContent,
@@ -12,25 +11,18 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { createReview } from "@/api/review";
 
 export const FilmCard = ({ film }: { film: Film }) => {
-    const rate = async (action: string) => {
-        try {
-            const _ = await axiosInst.post(
-                `films/rate?id=${film.id}&action=${action}`,
-            );
-        } catch (error) {
-            console.log((error as Error).message);
-        }
-    };
+    const [open, setOpen] = useState(false);
 
-    const Thumbs = ({ hoverCard }: { hoverCard: boolean }) => {
+    const Actions = ({ hoverCard }: { hoverCard: boolean }) => {
         return (
             <div className="flex gap-1 ">
                 <Button
                     variant={hoverCard ? "outline" : "ghost"}
-                    className="rounded-full border-2 border-gray-300"
-                    onClick={() => rate("like")}
+                    className={`rounded-full border-2 border-gray-300 ${film.userPositive && "bg-blue-500 text-white"}`}
+                    onClick={() => createReview(film.id, true, "")}
                 >
                     {hoverCard ? "" : "Нравиться"}
                     <a>{film.likes}</a>
@@ -38,12 +30,21 @@ export const FilmCard = ({ film }: { film: Film }) => {
                 </Button>
                 <Button
                     variant={hoverCard ? "secondary" : "ghost"}
-                    className="rounded-full border-2 border-gray-300"
-                    onClick={() => rate("dislike")}
+                    className={`rounded-full border-2 border-gray-300 ${!film.userPositive && "bg-blue-500  text-white"}`}
+                    onClick={() => createReview(film.id, false, "")}
                 >
                     {film.dislikes}
 
                     <ThumbsDown strokeWidth={2} />
+                </Button>
+                <Button
+                    variant={hoverCard ? "secondary" : "ghost"}
+                    className="rounded-full border-2 border-gray-300"
+                    onClick={() => {
+                        setOpen(true);
+                    }}
+                >
+                    <MessageSquare strokeWidth={2} />
                 </Button>
             </div>
         );
@@ -68,7 +69,7 @@ export const FilmCard = ({ film }: { film: Film }) => {
                             />
                         </DialogTrigger>
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2     opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto ">
-                            <Thumbs hoverCard={true} />
+                            <Actions hoverCard={true} />
                         </div>
                     </div>
                     <DialogTrigger asChild>
@@ -110,15 +111,13 @@ export const FilmCard = ({ film }: { film: Film }) => {
                         </div>
                         <DialogDescription className="flex text-white flex-col gap-2 items-end">
                             <div className="pr-4">
-                                <Thumbs hoverCard={false} />
+                                <Actions hoverCard={false} />
                             </div>
                             {film.description}
                         </DialogDescription>
                     </div>
                 </DialogContent>
-            </Dialog>
-            <Dialog>
-                <DialogContent className="">sdhhfhfh</DialogContent>
+                <ReviewsDrawer open={open} setOpen={setOpen} filmId={film.id} />
             </Dialog>
         </>
     );

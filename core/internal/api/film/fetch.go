@@ -5,7 +5,9 @@ import (
 
 	"github.com/bebrochkas/rural_potatoes/core/internal/crypto"
 	"github.com/bebrochkas/rural_potatoes/core/internal/db/films"
+	"github.com/bebrochkas/rural_potatoes/core/internal/db/reviews"
 	"github.com/bebrochkas/rural_potatoes/core/internal/db/tags"
+	"github.com/bebrochkas/rural_potatoes/core/models"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -19,13 +21,15 @@ func fetchFilms(c *fiber.Ctx) error {
 
 	tags_query := c.Query("tags", "")
 
+	user_id := crypto.GetUserID(c)
+
 	var err error
 	var tagIds []string
 	var strict bool = true
 
 	switch tags_query {
 	case "feed":
-		tagIds, err = tags.SelectFeedTags(crypto.GetUserID(c))
+		tagIds, err = tags.SelectFeedTags(user_id)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 				"error": err,
@@ -46,6 +50,22 @@ func fetchFilms(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.JSON(films)
+	var filmsWreviews []models.Film
+
+	for _, film := range films {
+		likes, dislikes, userPositive, err := reviews.ProcessReviewsForFilm(user_id, film.ID)
+		if err != nil {
+			return err
+		}
+
+		film.Likes = likes
+		film.Dislikes = dislikes
+		film.UserPositive = userPositive
+
+		filmsWreviews = append(filmsWreviews, film)
+
+	}
+
+	return c.JSON(filmsWreviews)
 
 }

@@ -1,3 +1,17 @@
+export interface Review {
+    id: number;
+    userId: number;
+    filmId: number;
+    positive: boolean;
+    content: string;
+    updated_at: string;
+    user: User;
+}
+
+interface User {
+    username: string;
+}
+
 export interface Tag {
     id: number;
     name: string;
@@ -15,6 +29,7 @@ export interface Film {
     rate: number;
     likes: number;
     dislikes: number;
+    userPositive: boolean;
 
     tags: Tag[];
 }

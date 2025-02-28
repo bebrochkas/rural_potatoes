@@ -40,7 +40,7 @@ func SelectTagsFilms(offset int, limit int, strict bool, tags []string, prompt s
 		}
 	}
 
-	query = query.Limit(limit).Offset(offset).Order("likes desc, films.id")
+	query = query.Limit(limit).Offset(offset).Order("films.id")
 
 	err := query.Find(&films).Error
 	if err != nil {

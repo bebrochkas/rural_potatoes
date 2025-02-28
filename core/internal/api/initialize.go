@@ -5,6 +5,7 @@ import (
 
 	"github.com/bebrochkas/rural_potatoes/core/config"
 	"github.com/bebrochkas/rural_potatoes/core/internal/api/film"
+	"github.com/bebrochkas/rural_potatoes/core/internal/api/review"
 	"github.com/bebrochkas/rural_potatoes/core/internal/api/tag"
 	"github.com/bebrochkas/rural_potatoes/core/internal/api/user"
 	jwtware "github.com/gofiber/contrib/jwt"
@@ -30,6 +31,8 @@ func Initialize() {
 	}))
 
 	film.SetupRoutes(api)
+
+	review.SetupRoutes(api)
 
 	tag.SetupRoutes(api)
 

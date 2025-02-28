@@ -1,13 +1,66 @@
 services:
-  postgres:
+  db:
     image: "postgres"
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: root
       POSTGRES_DB: teletagy
+
+    networks:
+      - internal
   adminer:
       image: dockette/adminer
       ports:
         - 8080:80
+      depends_on:
+      - db
+
+
+      networks:
+      - internal
+
+  core:
+    build:
+      context: .
+      dockerfile: core/Dockerfile
+    depends_on:
+      - tagger
+      - db
+
+    networks:
+      - internal
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - core
+    networks:
+      - internal
+
+  tagger:
+    build:
+      context: ./tagger
+      dockerfile: Dockerfile
+    networks:
+      - internal
+
+
+  nginx:
+    image:
+      nginx:latest
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - core
+
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

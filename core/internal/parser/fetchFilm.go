@@ -44,7 +44,7 @@ type KinoPoiskResp struct {
 }
 
 func fetchFilm(_ int) (*KinoPoiskResp, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("https://api.kinopoisk.dev/v1.4/movie/random?notNullFields=name&notNullFields=description"), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("https://api.kinopoisk.dev/v1.4/movie/random?notNullFields=name&notNullFields=description&lists=bafta-best-film"), nil)
 	if err != nil {
 		return nil, err
 	}

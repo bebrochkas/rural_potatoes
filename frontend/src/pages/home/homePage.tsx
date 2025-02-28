@@ -5,6 +5,7 @@ import { TagBar } from "@/components/tags/tagBar";
 import { Film, Tag } from "@/interfaces/interfaces";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
+import shinjiUrl from "@/assets/shinj.webp";
 import { debounce } from "lodash";
 
 const PAGE_SIZE = 4; // Number of films per request
@@ -139,7 +140,7 @@ export const HomePage = () => {
 
     return (
         <div className="flex flex-col gap-10 justify-center items-center ">
-            <div className="flex flex-col gap-2 w-[45%]">
+            <div className="flex flex-col gap-2 w-full lg:w-[45%] md:w-3/4 ">
                 <a
                     className={`italic text-sm text-center text-gray-500  transition-opacity duration-500 ease-in-out ${
                         prompt ? "opacity-100" : "opacity-0"
@@ -230,7 +231,12 @@ export const HomePage = () => {
                     <span className="sr-only">Loading...</span>
                 </div>
             )}
-            {!hasMore && <p className="text-center">the end.</p>}
+            {!hasMore && (
+                <div className="w-full flex flex-col items-center justify-center gap-2 font-mono">
+                    На этом фильмы кончаются.
+                    <img className="" src={shinjiUrl}></img>
+                </div>
+            )}
 
             <div ref={observerTarget}></div>
         </div>

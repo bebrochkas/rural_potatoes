@@ -8,7 +8,9 @@ type Film struct {
 	PosterUrl    string  `gorm:"not null" json:"posterUrl"`
 	BackdropUrl  string  `gorm:"not null" json:"backdropUrl"`
 	Rate         float32 `gorm:"not null" json:"rate"`
-	Likes        uint    `gorm:"not null;default:0" json:"likes"`
-	Dislikes     uint    `gorm:"not null;default:0" json:"dislikes"`
-	Tags         []Tag   `gorm:"many2many:film_tags;" json:"tags"`
+
+	Likes        uint  `gorm:"-" json:"likes"`
+	Dislikes     uint  `gorm:"-" json:"dislikes"`
+	UserPositive *bool `gorm:"-" json:"userPositive"`
+	Tags         []Tag `gorm:"many2many:film_tags;" json:"tags"`
 }

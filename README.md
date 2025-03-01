@@ -22,16 +22,7 @@ cd rural_potatoes
 ```
 
 ## Использование 
-Скачать [отсюда](http://) в `/tagger/models/` или обучить модель самостоятельно
-### Обучение модели
-```shell
-cd tagger/nlp
-python -m spacy train spacy_categorization_pipeline.cfg
---paths.train training_multi_label.spacy 
---paths.dev test_multi_label.spacy 
---output ../models/textcat_multilabel_model
-```
-и дождаться окончания процесса обучения обучения модели.
+Скачать [отсюда](/releases) в `/tagger/models/` или обучить модель самостоятельно
 
 ### Запуск
 Убедитесь что Docker уставновлен на вашей системе
@@ -40,5 +31,16 @@ python -m spacy train spacy_categorization_pipeline.cfg
 ```shell
 docker compose up
 ```
+
+## Дополниетльно
+### При желеании можете обучть модель самостоятельно
+```shell
+cd tagger/nlp
+python -m spacy train spacy_categorization_pipeline.cfg
+--paths.train training_multi_label.spacy 
+--paths.dev test_multi_label.spacy 
+--output ../models/textcat_multilabel_model
+```
+и дождаться окончания процесса обучения обучения модели.
 
 ### Интерфейс будет доступен на [localhost:3000](http://loclhost:3000)🎉
